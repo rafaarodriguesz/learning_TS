@@ -42,3 +42,11 @@ console.log(typeof a)
 a = true 
 
 console.log(a)
+
+// 4 - inference e anotation
+
+const ann: string = "teste"
+
+let inf = "teste"
+
+console.log("testando")
