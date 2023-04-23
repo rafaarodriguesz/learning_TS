@@ -113,5 +113,112 @@ showBalance(100)
 showBalance('500')
 // showBalance(true)
 
-// 11 union type
+// 11 avançando em union type
 
+function showUserRole(role: boolean | string){
+    if(typeof role === "boolean"){
+        return "Usuario nao aprovado"
+    }
+
+    return `a função do usuario é: ${role}`
+
+}
+
+console.log(showUserRole(false))
+console.log(showUserRole("Admin"))
+
+// 12 type alias
+// cria um tipo e determina oq ele verifica
+
+type ID = string | number
+
+function showId(id: ID){
+    console.log(`O ID é: ${id}`)
+}
+
+showId(123)
+showId("23478")
+
+// 13 - Interface
+
+interface Point {
+    x1: number
+    y2: number
+    z3: number
+}
+
+// function showCoords(obj: {x:number, y:number, z:number})
+
+function showCoords(obj: Point){
+    console.log(`${obj.x1}, ${obj.y2}, ${obj.z3}`)
+
+}
+
+const coordObj: Point = {
+    x1: 10,
+    y2: 20,
+    z3: 30
+}
+
+showCoords(coordObj)
+
+// 14 interface x type alias
+
+interface Person {
+    name: string
+}
+
+interface Person{
+    age: number
+}
+
+const somePerson: Person = {name: "Mateus", age: 30}
+
+console.log(somePerson)
+
+type personType = {
+    name: string
+}
+
+// type personType = {
+//     age: number
+// }      (ele nap aceita adicionar mais vairaveis)
+
+// 15 literal types obs(valores como tipos)
+
+let test: "testando"
+
+test = "testando"
+
+console.log(test)
+
+function showDirection(direction: "left" | "right" | "center"){
+    console.log(`A direção é: ${direction}`);
+}
+
+showDirection("left")
+// showDirection("1213ight")
+
+// 16 non null assertion operator (NÃO NULO [!])
+
+const p = document.getElementById("some-p")
+
+console.log(p!.innerHTML)
+
+// 17 Bigint (declarar numeros com valores altos)
+
+let n: bigint
+
+n = 10000n
+
+console.log(n)
+
+console.log(typeof(n))
+
+// 18 Symbol (Valor unico)
+
+let symbolA = Symbol("a")
+let symbolB = Symbol("a")
+
+console.log(symbolA == symbolB)
+console.log(symbolA === symbolB)

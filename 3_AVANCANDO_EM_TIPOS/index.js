@@ -69,3 +69,54 @@ function showBalance(balance) {
 showBalance(100);
 showBalance('500');
 // showBalance(true)
+// 11 avançando em union type
+function showUserRole(role) {
+    if (typeof role === "boolean") {
+        return "Usuario nao aprovado";
+    }
+    return `a função do usuario é: ${role}`;
+}
+console.log(showUserRole(false));
+console.log(showUserRole("Admin"));
+function showId(id) {
+    console.log(`O ID é: ${id}`);
+}
+showId(123);
+showId("23478");
+// function showCoords(obj: {x:number, y:number, z:number})
+function showCoords(obj) {
+    console.log(`${obj.x1}, ${obj.y2}, ${obj.z3}`);
+}
+const coordObj = {
+    x1: 10,
+    y2: 20,
+    z3: 30
+};
+showCoords(coordObj);
+const somePerson = { name: "Mateus", age: 30 };
+console.log(somePerson);
+// type personType = {
+//     age: number
+// }      (ele nap aceita adicionar mais vairaveis)
+// 15 literal types obs(valores como tipos)
+let test;
+test = "testando";
+console.log(test);
+function showDirection(direction) {
+    console.log(`A direção é: ${direction}`);
+}
+showDirection("left");
+// showDirection("1213ight")
+// 16 non null assertion operator (NÃO NULO [!])
+const p = document.getElementById("some-p");
+console.log(p.innerHTML);
+// 17 Bigint (declarar numeros com valores altos)
+let n;
+n = 10000n;
+console.log(n);
+console.log(typeof (n));
+// 18 Symbol (Valor unico)
+let symbolA = Symbol("a");
+let symbolB = Symbol("a");
+console.log(symbolA == symbolB);
+console.log(symbolA === symbolB);
