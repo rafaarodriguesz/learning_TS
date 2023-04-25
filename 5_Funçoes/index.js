@@ -1,30 +1,30 @@
 "use strict";
-// ao inves de colocar number ou boolean coloquei os apenas os valores que podem ser utilizados na review
-function usersReview(review) {
-    if (typeof review === "number") {
-        if (review == 1) {
-            console.log("não gostei");
-        }
-        else if (review === 2) {
-            console.log("mais ou menos");
-        }
-        else if (review === 3) {
-            console.log("bom!");
-        }
-        else if (review === 4) {
-            console.log("muito bom!");
-        }
-        else if (review === 5) {
-            console.log("excelente!");
-        }
-    }
-    else {
-        console.log("O usuario não colocou uma review");
-    }
+// 1 - void
+function noReturn() {
+    console.log("não recebe retorno");
 }
-usersReview(1);
-usersReview(2);
-usersReview(3);
-usersReview(4);
-usersReview(5);
-usersReview(false);
+noReturn();
+// 2 - Callback Como argumento
+function greeting(name) {
+    return (`Olá ${name}`);
+}
+function preGreeting(f, userName) {
+    console.log("Preparando");
+    const greet = f(userName);
+    console.log(greet);
+}
+preGreeting(greeting, "Rafael");
+// 3 - generic function
+function functionArray(arr) {
+    console.log(arr[0]);
+}
+const array = ["idsofj", "sduifh", "hdsifu"];
+const number = [134, 324213, 4213];
+functionArray(array);
+functionArray(number);
+function mergeObjects(obj1, obj2) {
+    return Object.assign(Object.assign({}, obj1), obj2);
+}
+const newObject = mergeObjects({ name: "Rafael" }, { age: 16, job: "Programer" });
+console.log(newObject);
+console.log(array);
