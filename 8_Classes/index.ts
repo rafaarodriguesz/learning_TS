@@ -259,3 +259,179 @@ class nova extends Base {
 const myObject = new nova
 
 myObject.someMethod()
+
+// 11 public (não muda muita coisa)
+
+class c{
+   public x = 10
+}
+
+class d extends c {
+
+}
+
+const cInstance = new c()
+
+console.log(cInstance.x)
+
+const dInstance = new d()
+
+console.log(dInstance.x)
+
+// 12 protected
+
+class E {
+    protected x = 10
+}
+
+class F extends E {
+    show(){
+        console.log("x: " + this.x)
+    }
+}
+
+const fInstance = new F
+// console.log(fInstance.x)
+fInstance.show()
+
+// 13 private (nivel maximo de proteção)
+
+class PrivateClass{
+    private name = "private"
+
+    showName(){
+        return this.name
+    }
+
+    private privateMethod(){
+        console.log("método privado")
+    }
+
+    showName2(){
+    this.privateMethod()
+    }
+}
+
+const pObj = new PrivateClass()
+console.log(pObj.showName())
+// console.log(pObj.name)
+pObj.showName2()
+
+// class TestPrivate extends PrivateClass{
+//     myMethod(){
+//         this.privateMethod()
+//     }
+// }
+
+// 14 static menbers (colocar pre valores) sem usar o constructor
+
+class StaticMenbers {
+    static prop = "teste static"
+
+    static staticMethod(){
+        console.log("este é um metodo estático") 
+    }
+}
+
+
+console.log(StaticMenbers.prop)
+
+StaticMenbers.staticMethod()
+
+// 15 Generic class (generic vai aceitar qualquer coisa)
+class Item<T,U >{
+    first
+    second
+
+    constructor(first: T, second: U){
+        this.first = first
+        this.second = second
+    }
+
+    get showFirst(){
+        return `O first é: ${this.first}`
+    }
+}
+
+const newItem = new Item ("caixa", "surpresa")
+
+console.log(newItem)
+console.log(newItem.showFirst)
+
+// 16 parameters properties
+class ParameterProperties{
+    constructor(public name: string, private qty: number, private price: number){
+        this.name = name 
+        this.qty = qty
+        this.price = price
+    }
+
+    get showQty(){
+        return `Qtd total: ${this.qty}`
+    }
+
+    get showPrice(){
+        return `Qty total ${this.price}`
+    }
+}
+
+const newShirt = new ParameterProperties("Camisa",5,6)
+
+console.log(newShirt.name)
+console.log(newShirt.showPrice)
+console.log(newShirt.showQty)
+
+// 17 class expressions
+
+const myClass = class<T>{
+    name 
+
+    constructor(name: T){
+        this.name = name 
+    }
+}
+
+const pessoa = new myClass("Joanes")
+
+console.log(pessoa)
+
+console.log(pessoa.name)
+
+// 18 Abstract class (tipo um molde)
+
+abstract class abstractclass {
+    abstract showName():void;
+}
+
+//const newObj = new abstractclass();
+
+class AbstractExemple extends abstractclass{
+    name: string
+    
+    constructor(name: string){
+        super()
+        this.name = name;
+    }
+
+    showName(){
+        console.log(`O nome é: ${this.name}`)
+    }
+}
+
+const newAbstractObj = new AbstractExemple("marcelu");
+
+newAbstractObj.showName();
+
+// 19 relaçao entre classes
+
+class Dog{
+    name!: string
+}
+
+class Cat {
+    name!: string
+}
+
+const doguinho: Dog = new Cat()
+
+console.log(doguinho)
