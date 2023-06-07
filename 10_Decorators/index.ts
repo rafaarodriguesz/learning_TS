@@ -89,3 +89,95 @@ class Machine{
 }
 
 const trator = new Machine("Trator")
+
+// 5 acessor decorator
+class Monster{
+    name?
+    age?
+
+    constructor(name: string, age: number){
+        this.name = name
+        this.age = age
+    }
+
+    @enumerable(true)
+    get showName(){
+        return `nome do monstro ${this.name}`
+    }
+
+    @enumerable(false)
+    get showAge(){
+        return `Idade do Monstro ${this.age}`
+    }
+}
+
+const charmander = new Monster("Charmander", 13);
+
+console.log(charmander);
+
+// 6 property decorator
+// 1 - 00001
+function formatNumber{
+    return function(target: Object, propertKey: string){
+
+        let value: string
+
+        const getter = function(){
+            return value
+        }
+
+        const setter = function(newVal: string){
+            value = newVal.padStart(5, "0")
+        }
+
+        Object.defineProperty(target, propertKey, {
+            set: setter,
+            get: getter
+        })
+    }
+}
+
+class ID {
+    @formatNumber()
+    id 
+
+    constructor(id: string){
+        this.id = id
+    }
+}
+
+const newItem = new ID("1")
+
+console.log(newItem)
+console.log(newItem.id)
+
+// 7 exemplo real com class decorator 
+function createdDate(created: Function){
+    created.prototype.createdAt = new Date();
+}
+
+@createdDate
+class Book {
+    id
+    createdAt?: Date
+
+    constructor(id: number){
+        this.id = id
+    }
+}
+
+@createdDate
+class Pen {
+    id
+
+    constructor(id: number){
+        this.id = id
+    }
+}
+
+const newBook = new Book(12)
+const pen = new Pen(55)
+
+console.log(newBook)
+console.log(pen)
+console.log(newBook.createdAt)

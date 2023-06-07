@@ -82,3 +82,77 @@ __decorate([
     enumerable(false)
 ], Machine.prototype, "showName", null);
 const trator = new Machine("Trator");
+// 5 acessor decorator
+class Monster {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    get showName() {
+        return `nome do monstro ${this.name}`;
+    }
+    get showAge() {
+        return `Idade do Monstro ${this.age}`;
+    }
+}
+__decorate([
+    enumerable(true)
+], Monster.prototype, "showName", null);
+__decorate([
+    enumerable(false)
+], Monster.prototype, "showAge", null);
+const charmander = new Monster("Charmander", 13);
+console.log(charmander);
+// 6 property decorator
+// 1 - 00001
+function formatNumber() {
+    return function (target, propertKey) {
+        let value;
+        const getter = function () {
+            return value;
+        };
+        const setter = function (newVal) {
+            value = newVal.padStart(5, "0");
+        };
+        Object.defineProperty(target, propertKey, {
+            set: setter,
+            get: getter
+        });
+    };
+}
+class ID {
+    constructor(id) {
+        this.id = id;
+    }
+}
+__decorate([
+    formatNumber()
+], ID.prototype, "id", void 0);
+const newItem = new ID("1");
+console.log(newItem);
+console.log(newItem.id);
+// 7 exemplo real com class decorator 
+function createdDate(created) {
+    created.prototype.createdAt = new Date();
+}
+let Book = class Book {
+    constructor(id) {
+        this.id = id;
+    }
+};
+Book = __decorate([
+    createdDate
+], Book);
+let Pen = class Pen {
+    constructor(id) {
+        this.id = id;
+    }
+};
+Pen = __decorate([
+    createdDate
+], Pen);
+const newBook = new Book(12);
+const pen = new Pen(55);
+console.log(newBook);
+console.log(pen);
+console.log(newBook.createdAt);
