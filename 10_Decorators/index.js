@@ -156,3 +156,60 @@ const pen = new Pen(55);
 console.log(newBook);
 console.log(pen);
 console.log(newBook.createdAt);
+// 8 exemplo real method decorator
+function checkIfUserPost() {
+    return function (target, key, descriptor) {
+        const childFunction = descriptor.value;
+        console.log(childFunction);
+        descriptor.value = function (...args) {
+            if (args[1] === true) {
+                console.log("usuario já postou");
+                return null;
+            }
+            else {
+                return childFunction.apply(this, args);
+            }
+        };
+        return descriptor;
+    };
+}
+class Post {
+    constructor() {
+        this.alreadyPosted = false;
+    }
+    post(content, alreadyPosted) {
+        this.alreadyPosted = true;
+        console.log(`Post do Usuario: ${content}`);
+    }
+}
+const newPost = new Post();
+newPost.post("Meu primeiro Post", newPost.alreadyPosted);
+newPost.post("Meu primeiro Post", newPost.alreadyPosted);
+// 9 exeplo real PropertyDecorator
+function Max(limit) {
+    return function (target, propertyKey) {
+        let value;
+        const getter = function () {
+            return value;
+        };
+        const setter = function (newVal) {
+            if (newVal.length > limit) {
+                console.log(`O valor deve ser no maximo ${limit} digitos`);
+                return;
+            }
+            else {
+                value = newVal;
+            }
+        };
+        Object.defineProperty(target, propertyKey, {
+            get: getter,
+            set: setter,
+        });
+    };
+}
+class Adimin {
+    constructor(userName) {
+        this.userName = userName;
+    }
+}
+let Pedro = new Adimin("pedrin123");
